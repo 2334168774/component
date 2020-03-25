@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css">
+</head>
+
+<body>
+    <div style="width: 100%;align-items:center;">
+        <div style="width: 160px;margin: 0 auto;"><p>2020语言排行榜</p></div>        
+        <div style="width: 100%;align-items: center;">
+            <div id="container" style="margin-left: 23%"></div>
+        </div>       
+        <div style="width: 100%;text-align: center;margin-top:26px;">
+            <div id="main" style="margin: 0 auto;width: 800px;height:400px;"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js"></script>
+    <script src="https://lib.baomitu.com/echarts/4.6.0/echarts.min.js"></script>
+    <script>
+        var data = [
+            ['Java', 1, "降", "-0.01%"],
+            ['C', 2, "升", "+2.44%"],
+            ['Python', 3, "升", "+1.41%"],
+            ['C++', 4, "降", "-2.58%"],
+            ['C#', 5, "升", "+2.07%"],
+            ['Visual Basic.NET', 6, "降", "-1.17%"],
+            ['JavaScript', 7, "降", "-0.85%"]
+        ],
+        container1 = document.getElementById('container'),
+        hot;
+
+        hot = new Handsontable(container1, {
+            data: data,
+            height:400,
+            rowHeights: 45,
+            colWidths: 200,
+            startRows: 7,
+            startCols: 4,
+            colHeaders: true,
+            colHeaders: ["语言名称","排名","升或降","变化幅度"],
+            className: "htCenter htMiddle",
+            licenseKey: 'non-commercial-and-evaluation'
+        })
+
+        var main1 = echarts.init(document.getElementById('main'));
+
+        var option = {
+            title: {
+                text: 'JavaScript语言排名变化'
+
+            },
+            tooltip: {
+                show: true,
+                trigger : 'axis',
+                axisPointer: {
+                    type: 'line',
+                    lineStyle: {
+                        color: '#555',
+                        width: 1,
+                        type: 'solid'
+                    },
+                },
+            },
+            xAxis: {
+                data: [2000,2005,2010,2015,2020],
+                axisPointer: {
+                    show: true
+                }
+            },
+            yAxis: {
+            },
+            series: [{
+                name: '排名',
+                type: 'line',
+                data: [6, 9, 8, 8, 7]
+            }]
+        };
+        main1.setOption(option);
+    </script>
+</body>
+</html>
